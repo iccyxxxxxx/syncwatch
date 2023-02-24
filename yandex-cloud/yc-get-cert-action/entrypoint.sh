@@ -13,7 +13,7 @@ ls
 curl -Lo tmp/ghlinux.tar.gz \
   --create-dirs \
   https://github.com/cli/cli/releases/download/v2.23.0/gh_2.23.0_linux_amd64.tar.gz \
-  && tar --strip-components=1 -xf tmp/ghlinux.tar.gz -C /opt/gh \
+  && tar --strip-components=1 -xf tmp/ghlinux.tar.gz -C ./opt/gh \
   && rm tmp/ghlinux.tar.gz
 
 PATH=$PATH:/opt/gh/bin/

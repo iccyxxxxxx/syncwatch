@@ -15,13 +15,16 @@ curl -Lo tmp/ghlinux.tar.gz \
   && tar --strip-components=1 -xf tmp/ghlinux.tar.gz -C opt/gh \
   && rm tmp/ghlinux.tar.gz
 
-PATH=$PATH:/opt/gh/bin/gh
+PATH=$PATH:/opt/gh/bin/
 gh --help
 
-# echo "Installing Yandex Cloud CLI..."
-# curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \
-#     bash -s -- -i /opt/yandex-cloud -n
-# PATH=$PATH:/opt/yandex-cloud/bin/
+echo "Installing Yandex Cloud CLI..."
+curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \
+    bash -s -- -i /opt/yandex-cloud -n
+PATH=$PATH:/opt/yandex-cloud/bin/
+
+cd opt
+ls -a
 
 # echo "Creating Service Account profile..."
 # yc config profile create sa-profile

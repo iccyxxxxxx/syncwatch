@@ -15,7 +15,7 @@ curl -Lo tmp/ghlinux.tar.gz \
   && tar --strip-components=1 -xf tmp/ghlinux.tar.gz -C opt/gh \
   && rm tmp/ghlinux.tar.gz
 
-cd opt/gh
+cd opt/gh/bin
 ls -a
 PATH=$PATH:opt/gh/bin/
 gh --help

@@ -64,6 +64,7 @@ jobs:
 
   prepare-certificate:
     runs-on: ubuntu-latest
+    permissions: write-all
     outputs:
       certificate-full-chain: ${{ steps.yc-get-cert.outputs.certificate-full-chain }}
       private-key: ${{ steps.yc-get-cert.outputs.private-key }}

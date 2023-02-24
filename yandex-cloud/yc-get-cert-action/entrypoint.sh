@@ -8,7 +8,8 @@ echo "Setting Service Account JSON credentials..."
 echo $YC_SA_JSON_CREDENTIALS > key.json
 
 echo "Installing GitHub CLI"
-mkdir -p opt/gh/
+mkdir -p opt/gh
+ls
 curl -Lo tmp/ghlinux.tar.gz \
   --create-dirs \
   https://github.com/cli/cli/releases/download/v2.23.0/gh_2.23.0_linux_amd64.tar.gz \

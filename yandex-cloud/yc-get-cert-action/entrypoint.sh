@@ -7,6 +7,14 @@ YC_CERTIFICATE_ID=$3
 echo "Setting Service Account JSON credentials..."
 echo $YC_SA_JSON_CREDENTIALS > key.json
 
+echo "Installing GitHub CLI"
+curl -Lo tmp/ghlinux.tar.gz \
+  https://github.com/cli/cli/releases/download/v2.23.0/gh_2.23.0_linux_amd64.tar.gz \
+  && tar --strip-components=1 -xf tmp/ghlinux.tar.gz \
+  && rm tmp/ghlinux.tar.gz
+
+gh --help
+
 echo "Installing Yandex Cloud CLI..."
 curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \
     bash -s -- -i /opt/yandex-cloud -n

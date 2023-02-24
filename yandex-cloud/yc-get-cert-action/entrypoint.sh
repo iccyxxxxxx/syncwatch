@@ -8,6 +8,7 @@ echo "Setting Service Account JSON credentials..."
 echo $YC_SA_JSON_CREDENTIALS > key.json
 
 echo "Installing GitHub CLI..."
+pwd
 mkdir -p opt/gh
 curl -Lo tmp/ghlinux.tar.gz \
   --create-dirs \
@@ -22,9 +23,6 @@ echo "Installing Yandex Cloud CLI..."
 curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \
     bash -s -- -i /opt/yandex-cloud -n
 PATH=$PATH:/opt/yandex-cloud/bin/
-
-cd opt
-ls -a
 
 # echo "Creating Service Account profile..."
 # yc config profile create sa-profile

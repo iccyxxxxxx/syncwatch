@@ -36,7 +36,7 @@ CERTIFICATE_FULL_CHAIN=$(echo "$CERTIFICATE_FULL_CHAIN" | tr '\n' ';')
 PRIVATE_KEY=$(echo "$PRIVATE_KEY" | tr '\n' ';')
 
 echo "Creating action secrets with certificate..."
-gh secret set NGINX_CERT --body "$CERTIFICATE_FULL_CHAIN"
-gh secret set NGINX_CERT_KEY --body "$PRIVATE_KEY"
+gh secret set NGINX_CERT --body "$CERTIFICATE_FULL_CHAIN" -a actions
+gh secret set NGINX_CERT_KEY --body "$PRIVATE_KEY" -a actions
 
 echo "Done!"

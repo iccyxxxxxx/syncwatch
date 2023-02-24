@@ -10,7 +10,8 @@ on:
         required: false
         default: 'just for fun'
 
-permissions: write-all
+permissions:
+  contents: write
 
 env:
   BACKEND_IMAGE: ${{ secrets.DOCKER_HUB_USERNAME }}/syncwatch-backend-test:${{ github.sha }}

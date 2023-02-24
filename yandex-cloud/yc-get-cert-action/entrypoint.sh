@@ -17,8 +17,8 @@ curl -Lo tmp/ghlinux.tar.gz \
 
 cd opt/gh/bin
 ls -a
-PATH=$PATH:opt/gh/bin/
-gh --help
+PATH=$PATH:/opt/gh/bin/
+./opt/gh/bin/gh --help
 
 # echo "Installing Yandex Cloud CLI..."
 # curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \

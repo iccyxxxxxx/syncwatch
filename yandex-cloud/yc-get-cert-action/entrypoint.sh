@@ -17,7 +17,7 @@ curl -Lo tmp/ghlinux.tar.gz \
 
 cd opt/gh
 ls -a
-PATH=$PATH:/opt/gh/bin/
+PATH=$PATH:opt/gh/bin/
 gh --help
 
 # echo "Installing Yandex Cloud CLI..."

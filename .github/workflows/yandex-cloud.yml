@@ -74,6 +74,8 @@ jobs:
       - name: Get certificate from YC
         uses: ./yandex-cloud/yc-get-cert-action
         id: yc-get-cert
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           folder-id: ${{ secrets.YC_FOLDER_ID }}

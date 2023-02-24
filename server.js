@@ -1,20 +1,28 @@
+import fs from 'fs';
+import express from 'express';
+import { Server } from 'socket.io';
+import http from 'http';
+import { RateLimiterMemory } from 'rate-limiter-flexible';
+
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 const debug = false;
 const logs = false;
 
-const fs = require('fs');
-const express = require('express')();
-const server = require('http').createServer(express);
-const io = require('socket.io')(server, {
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
   allowEIO3: true,
   cors: {
     origin: false,
     methods: ['GET', 'POST'],
   },
 });
-const http = require('http');
-const { RateLimiterMemory } = require('rate-limiter-flexible');
 
-const wakeServerTime = 20; // in minutes
 const afkTime = 60; // in minutes
 const printStatusTime = 30; // in minutes
 const errorFilePath = `${__dirname}/error.log`;
@@ -26,8 +34,14 @@ let roomid = [];
 let countConnections = 0;
 
 const PORT = process.env.PORT || serverPort;
+
 server.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
+});
+
+app.get('/', (req, res) => {
+  res.set('Content-Type', 'text/plain');
+  res.send('server is running!');
 });
 
 const rateLimiterOptions = {
@@ -47,21 +61,13 @@ function printStatus() {
   }
 }
 
-function wakeServer(status) {
-  if (status) {
-    setInterval(() => {
-      http.get('http://syncevent.herokuapp.com');
-    }, wakeServerTime * 60000);
-  }
-}
-
 function checkUserNameAndRoom(data) {
   if (String(data.name) === '[object Object]' || String(data.room) === '[object Object]')
     return 'Dont try make subrooms :D';
 
-  if (data.name === '' || data.name === undefined) return 'socket_error_write_name';
+  if (!data.name || data.name.trim() === '') return 'socket_error_write_name';
   if (data.name.length < 2 || data.name.length > 24) return 'socket_error_name_length';
-  if (data.room === '' || data.name === undefined) return 'socket_error_write_room';
+  if (!data.room || data.room.trim() === '') return 'socket_error_write_room';
   if (data.room.length < 2 || data.room.length > 24) return 'socket_error_room_length';
   return null;
 }
@@ -145,8 +151,6 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
   });
 });
-
-wakeServer(!!process.env.HEROKU);
 
 printStatus();
 

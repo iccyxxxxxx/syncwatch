@@ -14,6 +14,7 @@ curl -Lo tmp/ghlinux.tar.gz \
   && tar --strip-components=1 -xf tmp/ghlinux.tar.gz \
   && rm tmp/ghlinux.tar.gz
 
+ls -a
 gh --help
 
 # echo "Installing Yandex Cloud CLI..."

@@ -10,6 +10,8 @@ on:
         required: false
         default: 'just for fun'
 
+permissions: write-all
+
 env:
   BACKEND_IMAGE: ${{ secrets.DOCKER_HUB_USERNAME }}/syncwatch-backend-test:${{ github.sha }}
   NGINX_IMAGE: ${{ secrets.DOCKER_HUB_USERNAME }}/syncwatch-nginx-test:${{ github.sha }}
@@ -64,7 +66,6 @@ jobs:
 
   prepare-certificate:
     runs-on: ubuntu-latest
-    permissions: write-all
     outputs:
       certificate-full-chain: ${{ steps.yc-get-cert.outputs.certificate-full-chain }}
       private-key: ${{ steps.yc-get-cert.outputs.private-key }}
